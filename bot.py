@@ -13,8 +13,6 @@ class StockBot(Client):
 		#Send chart with msg
 		self.sendLocalImage(s.get_chart(), msg, thread_id=thread_id, thread_type=thread_type)
 
-		#Remove the local copy of the chart image
-		os.remove(format(ticker_file_name))
 
 	def onMessage(self, author_id, message, thread_id, thread_type, **kwargs):
 		self.markAsDelivered(author_id, thread_id)
