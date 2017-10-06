@@ -8,7 +8,7 @@ import os
 class StockBot(Client):
 
 	def send_info(self, s, thread_id, thread_type):
-		msg = "${0}\n==================\nCurrent Price: ${1}\nDaily change: {2}".format(s.symbol, s.get_price(), s.get_percent_change())
+		msg = "${0}\n==================\nCurrent Price: ${1}\nDaily change: {2}%".format(s.symbol, s.get_price(), s.get_percent_change())
 
 		#Send chart with msg
 		self.sendLocalImage(s.get_chart(), msg, thread_id=thread_id, thread_type=thread_type)
