@@ -40,5 +40,5 @@ class StockBot(Client):
 					self.sendMessage(msg, thread_id=thread_id, thread_type=thread_type)
 
 
-client = StockBot("fbchatstockbot@gmail.com", "botpassword123")
+client = StockBot("<EMAIL>", "<PASSWORD>")
 client.listen()
