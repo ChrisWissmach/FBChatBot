@@ -55,7 +55,7 @@ class Stock:
 	#Load the chart from Google Finance API
 	def load_chart(self):
 		img = open(self.filename, "wb")
-		response = urllib2.urlopen(GOOGLE_FINANCE_BASE + "/getchart?q={0}&p={1}d&i={2}".format(self.symbol, self.duration, self.i)).read()
+		response = urllib2.urlopen(GOOGLE_FINANCE_BASE + "/getchart?q={0}&p={1}&i={2}".format(self.symbol, self.duration, self.i)).read()
 		img.write(response)
 		img.close()
 
