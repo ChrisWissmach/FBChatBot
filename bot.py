@@ -21,13 +21,13 @@ class StockBot(Client):
 		if author_id != self.uid:
 
 			if "$" in message:
-				ticker = parse_ticker(message).upper()
+				ticker, duration, i = parse_ticker(message)
 
 				#Not an actual ticker, maybe entered a dollar amount (i.e. $30)
 				if (ticker  == ''):
 					return
 
-				s = Stock(ticker)
+				s = Stock(ticker, duration, i)
 
 				if s.exists:
 					log.info("Found ticker symbol {0} in last message".format(s.symbol))

@@ -7,8 +7,10 @@ from helpers import *
 
 class Stock:
 
-	def __init__(self, ticker):
+	def __init__(self, ticker, duration, i):
 		self.symbol = ticker
+		self.duration = duration
+		self.i = i
 		self.filename = "{0}temp.png".format(self.symbol.replace(".", ""))
 		self.info = None
 		self.exists = True
@@ -53,7 +55,7 @@ class Stock:
 	#Load the chart from Google Finance API
 	def load_chart(self):
 		img = open(self.filename, "wb")
-		response = urllib2.urlopen(GOOGLE_FINANCE_BASE + "/getchart?q={0}&p=1d&i=150".format(self.symbol)).read()
+		response = urllib2.urlopen(GOOGLE_FINANCE_BASE + "/getchart?q={0}&p={1}d&i={2}".format(self.symbol, self.duration, self.i)).read()
 		img.write(response)
 		img.close()
 
