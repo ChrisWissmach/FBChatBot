@@ -21,7 +21,7 @@ def parse_ticker(msg):
 	    '5Y': 604800,
 	    '40Y': 604800,
   	}
-	after_dollar = (msg.split("$")[1]).split(" ")[:2]
+	after_dollar = (msg.split("$", 1)[1]).split(" ")[:2]
 	ticker = re.split('[^a-zA-Z\.\-]', after_dollar[0])[0].upper()
 	# if the ticker is entered as a dollar amount
 	if ticker.isnumeric():
