@@ -29,7 +29,7 @@ def parse_ticker(msg):
 		return (ticker, None, None)
 
 	duration = "1d"
-	if len(after_dollar) > 1:
+	if len(after_dollar) > 1 and len(after_dollar[1]) > 1:
 		if after_dollar[1] == "max":
 			duration = "40Y"
 		else:
