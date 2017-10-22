@@ -41,6 +41,28 @@ def parse_ticker(msg):
 	if duration in ranges:
 		i = ranges[duration]
 	else:
-		duration = "1d"
+		num = int(duration[0])
+		letter = duration[1]
+		if letter == 'd':
+			if num > 1 and num < 5:
+				num = 5
+			elif num > 5:
+				num = 1
+				letter = 'M'
+		elif letter == 'M':
+			if num > 1 and num < 3:
+				num = 3
+			elif num > 3 and num < 6:
+				num = 6
+			elif num > 6:
+				num = 1
+				letter = 'Y'
+		elif letter == 'Y':
+			if num > 1 and num < 5:
+				num = 5		
+			elif num > 5 and num < 40:
+				num = 40
+
+		duration = str(num) + letter
 	
 	return (ticker, duration, i)
