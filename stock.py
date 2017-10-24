@@ -65,8 +65,12 @@ class Stock:
 
 	#Returns the price of the stock from the last trade
 	def get_price(self):
-		return self.info["l"]
-
+		price = ""
+		try:
+			price = self.info["l"]
+		except:
+			price = "-1"
+		return price 
 	#Returns the percent change of the stock for the current day
 	def get_percent_change(self):
 		return self.info["cp"]

@@ -24,7 +24,7 @@ def parse_ticker(msg):
 	after_dollar = (msg.split("$", 1)[1]).split(" ")[:2]
 	ticker = re.split('[^a-zA-Z\.\-]', after_dollar[0])[0].upper()
 	# if the ticker is entered as a dollar amount
-	if ticker.isnumeric():
+	if ticker.isnumeric() or ticker == '':
 		ticker = ''
 		return (ticker, None, None)
 
@@ -35,7 +35,7 @@ def parse_ticker(msg):
 		else:
 			if after_dollar[1][0].isnumeric() and (after_dollar[1][1].lower() in valid_ranges):
 				duration = after_dollar[1][0] + after_dollar[1][1]
-			if after_dollar[1][1].lower() != 'd':
+			if after_dollar[1][1].lower() != 'd' and after_dollar[1][1].lower() in ['m','y']:
 				duration = after_dollar[1][0] + after_dollar[1][1].upper()
 	i = 60
 	if duration in ranges:

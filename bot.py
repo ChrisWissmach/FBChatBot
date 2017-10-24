@@ -8,7 +8,13 @@ import os
 class StockBot(Client):
 
 	def send_info(self, s, thread_id, thread_type):
-		msg = "${0} ({1})\n==================\nCurrent Price: ${2}\nDaily change: {3}%".format(s.symbol, s.duration.upper(), s.get_price(), s.get_percent_change())
+		price = s.get_price()
+		if price == "-1":
+			msg = "Error with ticker. Google's fault though, not mine..."
+			self.sendMessage(msg, thread_id=thread_id, thread_type=thread_type)
+			return
+
+		msg = "${0} ({1})\n==================\nCurrent Price: ${2}\nDaily change: {3}%".format(s.symbol, s.duration.upper(), price, s.get_percent_change())
 
 		#Send chart with msg
 		self.sendLocalImage(s.get_chart(), msg, thread_id=thread_id, thread_type=thread_type)
