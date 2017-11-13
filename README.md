@@ -1,3 +1,6 @@
-A simple facebook chat bot
+Messenger Stocks Bot
+========================
 
-It finds stock symbols in messages and sends some info..
+A simple Facebook Messenger chat bot that looks for stock symbols in messages and replies with relevant information
+
+![Example Use](https://i.imgur.com/sOIjYKB.png, "Example")
