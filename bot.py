@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from fbchat import log, Client
+from fbchat.models import *
 from helpers import parse_ticker
 from stock import Stock
 import os
@@ -11,23 +12,23 @@ class StockBot(Client):
 		price = s.get_price()
 		if price == "-1":
 			msg = "Error with ticker. Google's fault though, not mine..."
-			self.sendMessage(msg, thread_id=thread_id, thread_type=thread_type)
+			self.sendMessage(Message(text=msg), thread_id=thread_id, thread_type=thread_type)
 			return
 
 		msg = "${0} ({1})\n==================\nCurrent Price: ${2}\nDaily change: {3}%".format(s.symbol, s.duration.upper(), price, s.get_percent_change())
 
 		#Send chart with msg
-		self.sendLocalImage(s.get_chart(), msg, thread_id=thread_id, thread_type=thread_type)
+		self.sendLocalImage(s.get_chart(), Message(text=msg), thread_id=thread_id, thread_type=thread_type)
 
 
-	def onMessage(self, author_id, message, thread_id, thread_type, **kwargs):
+	def onMessage(self, author_id, message_object, thread_id, thread_type, **kwargs):
 		self.markAsDelivered(author_id, thread_id)
 		self.markAsRead(author_id)
 
 		if author_id != self.uid:
 
-			if "$" in message:
-				ticker, duration, i = parse_ticker(message)
+			if "$" in message_object.text:
+				ticker, duration, i = parse_ticker(message_object.text)
 
 				#Not an actual ticker, maybe entered a dollar amount (i.e. $30)
 				if (ticker  == ''):
@@ -41,7 +42,7 @@ class StockBot(Client):
 					
 				else:
 					msg = "Can't find ticker ${0}".format(ticker.upper())
-					self.sendMessage(msg, thread_id=thread_id, thread_type=thread_type)
+					self.sendMessage(Message(text=msg), thread_id=thread_id, thread_type=thread_type)
 
 
 client = StockBot("<EMAIL>", "<PASSWORD>")
