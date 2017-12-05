@@ -12,7 +12,7 @@ class StockBot(Client):
 		price = s.get_price()
 		if price == "-1":
 			msg = "Error with ticker. Google's fault though, not mine..."
-			self.sendMessage(Message(text=msg), thread_id=thread_id, thread_type=thread_type)
+			self.send(Message(text=msg), thread_id=thread_id, thread_type=thread_type)
 			return
 
 		msg = "${0} ({1})\n==================\nCurrent Price: ${2}\nDaily change: {3}%".format(s.symbol, s.duration.upper(), price, s.get_percent_change())
@@ -42,7 +42,7 @@ class StockBot(Client):
 					
 				else:
 					msg = "Can't find ticker ${0}".format(ticker.upper())
-					self.sendMessage(Message(text=msg), thread_id=thread_id, thread_type=thread_type)
+					self.send(Message(text=msg), thread_id=thread_id, thread_type=thread_type)
 
 
 client = StockBot("<EMAIL>", "<PASSWORD>")
