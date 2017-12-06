@@ -15,7 +15,7 @@ class StockBot(Client):
 			self.send(Message(text=msg), thread_id=thread_id, thread_type=thread_type)
 			return
 
-		msg = "${0} ({1})\n==================\nCurrent Price: ${2}\nDaily change: {3}%".format(s.symbol, s.duration.upper(), price, s.get_percent_change())
+		msg = "${0} ({1}) {2} \n==================\nCurrent Price: ${3}\nDaily change: {4}%".format(s.symbol, s.get_name(), s.duration.upper(), price, s.get_percent_change())
 
 		#Send chart with msg
 		self.sendLocalImage(s.get_chart(), Message(text=msg), thread_id=thread_id, thread_type=thread_type)

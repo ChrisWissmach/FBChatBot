@@ -75,6 +75,9 @@ class Stock:
 	def get_percent_change(self):
 		return self.info["cp"]
 
+	def get_name(self):
+		return self.info["name"]
+
 	#Returns a local path to the file containing the chart image
 	def get_chart(self):
 		return self.filename
